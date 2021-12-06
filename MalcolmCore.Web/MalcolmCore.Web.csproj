@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Autofac" Version="6.2.0" />
+    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="7.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Cors" Version="2.2.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.10" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.5" />
+    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="5.0.1" />
+    <PackageReference Include="System.Runtime.Caching" Version="5.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MalcolmCore.Data\MalcolmCore.Data.csproj" />
+    <ProjectReference Include="..\MalcolmCore.DTO\MalcolmCore.DTO.csproj" />
+    <ProjectReference Include="..\MalcolmCore.IService\MalcolmCore.IService.csproj" />
+    <ProjectReference Include="..\MalcolmCore.Service\MalcolmCore.Service.csproj" />
+    <ProjectReference Include="..\MalcolmCore.Utils\MalcolmCore.Utils.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="DownLoad\" />
+  </ItemGroup>
+
+</Project>
