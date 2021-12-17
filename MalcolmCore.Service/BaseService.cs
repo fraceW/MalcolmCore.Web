@@ -33,6 +33,21 @@ namespace MalcolmCore.Service
             //db.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
         }
 
+
+        public void Text() 
+        {
+            //var data = from c in db.useinfo
+            //           join p in db.useDetails on c.id equals p.id into r
+            //           select r;
+
+            //var data1 = db.useinfo.GroupJoin(db.useDetails, c => c.id, p => p.id, (c, p) => new { c,p});
+
+            //var data2 = from c in db.useinfo
+            //           join p in db.useDetails on c.id equals p.id into r
+            //           from pc in r.DefaultIfEmpty()
+            //           select pc;
+        }
+
         /****************************************下面EFCore基础方法的封装（同步）***********************************************/
         //1. 直接提交数据库
 
@@ -765,6 +780,11 @@ namespace MalcolmCore.Service
         IQueryable<T> IBaseService.EntitiesNoTrack<T>()
         {
             throw new NotImplementedException();
+        }
+
+        public List<T> GetListBy<T>() where T : class
+        {
+            return db.Set<T>().ToList();
         }
         #endregion
 

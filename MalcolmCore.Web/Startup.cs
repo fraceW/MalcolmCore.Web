@@ -65,6 +65,7 @@ namespace MalcolmCore.Web
                     build.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
                 });
             });
+            services.AddSingleton<IHostedService, MalcolmCore.Utils.HostedServices.TokenRefreshService>();
             //services.AddScoped<SkipAttribute>();
             services.AddMvc(o =>
             {
@@ -121,8 +122,6 @@ namespace MalcolmCore.Web
                 //配置相对路径（建议和前面的名起个一样的，当然也可以起别的，注意前面要有/）
                 RequestPath = "/DownLoad"
             });
-
-            
             app.UseCookiePolicy();
             app.UseSession();
 

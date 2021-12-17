@@ -1,4 +1,6 @@
-﻿using MalcolmCore.IService.Login;
+﻿using MalcolmCore.Data.Models;
+using MalcolmCore.IService;
+using MalcolmCore.IService.Login;
 using MalcolmCore.Utils.Caches;
 using MalcolmCore.Utils.Common;
 using MalcolmCore.Utils.Filter;
@@ -29,12 +31,14 @@ namespace MalcolmCore.WebApi.Controllers
         private readonly ILogger<WeatherForecastController> _logger;
 
         private IMemoryCache _cache;
+        private readonly IBaseService _IBaseService;
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger, ILoginService iLoginService, IMemoryCache cache)
+        public WeatherForecastController(ILogger<WeatherForecastController> logger, ILoginService iLoginService, IMemoryCache cache, IBaseService baseService)
         {
             _logger = logger;
             _ILoginService = iLoginService;
             _cache = cache;
+            _IBaseService = baseService;
         }
 
         [HttpGet]
@@ -96,7 +100,22 @@ namespace MalcolmCore.WebApi.Controllers
         [SkipAttribute]
         public string TextAction1() 
         {
-            ActionHelp.Init(Capture());
+            //ActionHelp.Init(Capture());
+            //string guid = Guid.NewGuid().ToString();
+            //OneToManySingle data = new OneToManySingle()
+            //{
+            //    Id = guid
+            //    ,
+            //    oneToManies = new List<OneToManyMany>()
+            //    {
+            //        new OneToManyMany(){Id = Guid.NewGuid().ToString(),OneId = guid},
+            //        new OneToManyMany(){Id = Guid.NewGuid().ToString(),OneId = guid},
+            //        new OneToManyMany(){Id = Guid.NewGuid().ToString(),OneId = guid}
+            //    }
+            //};
+            //_IBaseService.Add<OneToManySingle>(data);
+
+            var data1 = _IBaseService.GetListBy<OneToManySingle>();
             return "TextAction1";
         }
 

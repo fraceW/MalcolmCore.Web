@@ -5,6 +5,7 @@ using MalcolmCore.Utils;
 using MalcolmCore.Utils.Caches;
 using MalcolmCore.Utils.Common;
 using MalcolmCore.Utils.Filter;
+using MalcolmCore.Utils.Middleware;
 using MalcolmCore.Utils.Swaggers;
 using MalcolmCore.WebApi.AutoFac;
 using Microsoft.AspNetCore.Builder;
@@ -71,7 +72,7 @@ namespace MalcolmCore.WebApi
             //ÃÌº”ª∫¥Ê
             //services.AddCacheStrategy("Memory");
             services.AddSingleton<MemoryCacheHelp>();
-
+            
             services.AddSession();
             services.AddLogStrategy();
             //øÁ”Ú
@@ -82,7 +83,7 @@ namespace MalcolmCore.WebApi
                     build.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
                 });
             });
-
+            services.AddSingleton<IHostedService, MalcolmCore.Utils.HostedServices.TokenRefreshService>();
             services.AddMvc(o =>
             {
                 //»´æ÷π˝¬À∆˜
@@ -99,7 +100,7 @@ namespace MalcolmCore.WebApi
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env) 
         {
             if (env.IsDevelopment())
             {
@@ -109,6 +110,17 @@ namespace MalcolmCore.WebApi
             app.UseRouting();
 
             app.UseAuthorization();
+
+
+            app.UseFloorOne();
+
+            app.Use(async (context, next) => 
+            {
+                Console.WriteLine("FloorThreeMiddleware In");
+                await next.Invoke();
+                Console.WriteLine("FloorThreeMiddleware Out");
+            });
+
 
             app.UseSwagger();
             app.UseSwaggerUI(useswaggerui => 

@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using MalcolmCore.Data.Models;
 
 namespace MalcolmCore.Web.Controllers
 {
@@ -26,15 +27,18 @@ namespace MalcolmCore.Web.Controllers
         [SkipAttribute]
         public ActionResult Index()
         {
-            useinfo useinfo = new useinfo()
-            {
-                id = Guid.NewGuid().ToString(),
-                usename = "wll",
-                pwd = "123456",
-                useremark = "普通用户",
-                creatdate = DateTime.Now
-            };
-            _IBaseService.Add<useinfo>(useinfo);
+            //useinfo useinfo = new useinfo()
+            //{
+            //    id = Guid.NewGuid().ToString(),
+            //    usename = "wll",
+            //    pwd = "123456",
+            //    useremark = "普通用户",
+            //    creatdate = DateTime.Now
+            //};
+            //_IBaseService.Add<useinfo>(useinfo);
+
+
+            
 
             return View();
         }

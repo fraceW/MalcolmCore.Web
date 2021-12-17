@@ -1,4 +1,5 @@
 ﻿using MalcolmCore.Data;
+using MalcolmCore.Data.Models;
 using MalcolmCore.IService;
 using MalcolmCore.Utils.Logs;
 using MalcolmCore.Web.Models;
@@ -25,18 +26,28 @@ namespace MalcolmCore.Web.Controllers
 
         public IActionResult Index()
         {
-            useinfo useinfo = new useinfo()
-            {
-                id = Guid.NewGuid().ToString(),
-                usename = "wll",
-                pwd = "123456",
-                useremark = "普通用户",
-                creatdate = DateTime.Now
-            };
-            _IBaseService.Add<useinfo>(useinfo);
-            LogUtils.Debug("ok");
+            //useinfo useinfo = new useinfo()
+            //{
+            //    id = Guid.NewGuid().ToString(),
+            //    usename = "wll",
+            //    pwd = "123456",
+            //    useremark = "普通用户",
+            //    creatdate = DateTime.Now
+            //};
+            //_IBaseService.Add<useinfo>(useinfo);
+            //LogUtils.Debug("ok");
 
-            LogUtils.Info("Info", "ApiLog");
+            //LogUtils.Info("Info", "ApiLog");
+            string guid = Guid.NewGuid().ToString();
+            OneToManySingle data = new OneToManySingle() { Id = guid
+                , oneToManies = new List<OneToManyMany>() 
+                { 
+                    new OneToManyMany(){Id = Guid.NewGuid().ToString(),OneId = guid},
+                    new OneToManyMany(){Id = Guid.NewGuid().ToString(),OneId = guid},
+                    new OneToManyMany(){Id = Guid.NewGuid().ToString(),OneId = guid}
+                } };
+            _IBaseService.Add<OneToManySingle>(data);
+
             return View();
         }
 

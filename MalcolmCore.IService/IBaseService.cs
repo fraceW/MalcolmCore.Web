@@ -69,6 +69,8 @@ namespace MalcolmCore.IService
 
         #endregion
 
+        List<T> GetListBy<T>() where T:class;
+
         #region 07-根据条件查询
         /// <summary>
         /// 根据条件查询

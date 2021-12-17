@@ -49,6 +49,7 @@ namespace MalcolmCore.Utils.Filter
                     context.Result = new RedirectResult("~/Login/index");
                 }
             }
+
         }
     }
 }
