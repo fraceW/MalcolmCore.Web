@@ -134,5 +134,36 @@ namespace MalcolmCore.Service.Login
             var bytes = Convert.FromBase64String(base64UrlStr);
             return Encoding.UTF8.GetString(bytes);
         }
+
+        public void test() 
+        {
+            using (var dataContext = new CoreFrameDBContext()) 
+            {
+                var q1 = from u in dataContext.useinfo
+                        from d in dataContext.useDetails
+                        where u.id == d.id && u.creatdate.HasValue
+                        select u;
+
+                var q2 = from u in dataContext.useinfo
+                         join d in dataContext.useDetails on u.id equals d.id
+                         select u;
+                //join时必须将join后的表into到一个新的变量XX中，然后要用XX.DefaultIfEmpty()表示外连接。
+                //DefaultIfEmpty使用了泛型中的default关键字。default关键字对于引用类型将返回null,而对于值类型则返回0。对于结构体类型，则会根据其成员类型将它们相应地初始化为null(引用类型)或0(值类型)
+                var q3 = from u in dataContext.useinfo
+                         join d in dataContext.useDetails on u.id equals d.id into f
+                         from c in f.DefaultIfEmpty()
+                         select c;
+
+                var q4 = from u in dataContext.useinfo
+                         orderby u.id descending
+                         select u;
+
+                var q5 = from u in dataContext.useinfo
+                         group u by u.id into g
+                         select g;
+
+                q1.ToDictionary(t => t.id);
+            }
+        }
     }
 }

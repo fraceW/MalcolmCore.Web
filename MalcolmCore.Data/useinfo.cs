@@ -16,6 +16,6 @@ namespace MalcolmCore.Data
         [Display(Name = "用户说明")]
         public string useremark { get; set; }
         [Display(Name = "创建时间")]
-        public DateTime creatdate { get; set; }
+        public DateTime? creatdate { get; set; }
     }
 }

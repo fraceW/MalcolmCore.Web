@@ -86,10 +86,27 @@ namespace MalcolmCore.WebApi.Controllers
             return res;
         }
 
+        
+        [HttpPost]
+        [SkipAttribute]
+        public ActionResult<Token> CheckLogin1(string userAccount, string userPwd)
+        {
+            RetuenResult<Token> res = _ILoginService.Login(userAccount, userPwd);
+            string refreshToken = string.Empty;
+            if (!_cache.TryGetValue(res.data.accessToken, out refreshToken))
+            {
+                var cacheOptions = new MemoryCacheEntryOptions()
+                    .SetSize(1024)
+                    .SetAbsoluteExpiration(TimeSpan.FromHours(12));
+                _cache.Set(res.data.accessToken, res.data.refreshToken, cacheOptions);
+            }
+            return res.data;
+        }
+
         /// <summary>
-         /// 获取信息
-         /// </summary>
-         /// <returns></returns>
+        /// 获取信息
+        /// </summary>
+        /// <returns></returns>
         [HttpPost]
         public string GetInfo()
          {

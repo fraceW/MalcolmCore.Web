@@ -8,7 +8,11 @@ namespace MalcolmCore.Data
 {
     public class CoreFrameDBContext: DbContext
     {
-        public CoreFrameDBContext(DbContextOptions<CoreFrameDBContext> options) : base(options) 
+        //public CoreFrameDBContext(DbContextOptions<CoreFrameDBContext> options) : base(options) 
+        //{
+
+        //}
+        public CoreFrameDBContext() 
         {
 
         }
